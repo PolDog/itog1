@@ -1,0 +1,23 @@
+  779  mkdir lasw_hw
+  780  cd lasw_hw/
+  781  ls
+  783  cat > Pets
+  788  echo > Pack_animals
+  789  vi Pack_animals 
+  790  cat Pets Pack_animals > megre
+  791  cat megre 
+  792  mv megre HumanFriends
+  794  cat HumanFriends 
+  795  mkdir NewFolder
+  796  mv HumanFriends NewFolder
+  797  ls
+  798  cd NewFolder/
+  799  ls
+  800  mysql --version
+  801  sudo apt install mysql-server mysql-client
+  819  wget http://archive.ubuntu.com/ubuntu/pool/universe/v/vlc/vlc-l10n_3.0.9.2-1_all.deb
+  822  sudo dpkg -i vlc-l10n_3.0.9.2-1_all.deb
+  823  dpkg -l vlc-l10n
+  827  sudo dpkg -r vlc-l10n
+  828  dpkg -l vlc-l10n
+  829  history > h.txt
