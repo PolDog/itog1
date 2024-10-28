@@ -22,7 +22,7 @@ public class Main {
 
     private static void showMenu() {
         clrscr();
-        System.out.println("В базе есть "+animals.size()+" животных.");
+        System.out.println("В базе есть " + animals.size() + " животных.");
         System.out.println("1 добавить животное");
         System.out.println("2 вывести список комманд");
         System.out.println("3 научить новой комманде");
@@ -60,7 +60,7 @@ public class Main {
         clrscr();
         System.out.println("Кого научить новым командам. Введите номер");
         for (int i = 0; i < animals.size(); i++) {
-            System.out.println(i + "). " + animals.get(i).getType() + " " + animals.get(i).getName()+", знает "+animals.get(i).getCommands().size()+" ком.");
+            System.out.println(i + "). " + animals.get(i).getType() + " " + animals.get(i).getName() + ", знает " + animals.get(i).getCommands().size() + " ком.");
         }
         int animalNumber = scanner.nextInt();
         System.out.println("Введите новую комманду:");
@@ -75,11 +75,11 @@ public class Main {
     private static void showCommands() {
         System.out.println("Чъи команды показать. Введите номер");
         for (int i = 0; i < animals.size(); i++) {
-            System.out.println(i + "). " + animals.get(i).getType() + " " + animals.get(i).getName()+", знает "+animals.get(i).getCommands().size()+" ком.");
+            System.out.println(i + "). " + animals.get(i).getType() + " " + animals.get(i).getName() + ", знает " + animals.get(i).getCommands().size() + " ком.");
         }
         int userInput = scanner.nextInt();
         clrscr();
-        System.out.println(animals.get(userInput).getName()+ " знает команды:");
+        System.out.println(animals.get(userInput).getName() + " знает команды:");
         for (int i = 0; i < animals.get(userInput).getCommands().size(); i++) {
             System.out.println("        " + animals.get(userInput).getCommands().get(i));
         }
@@ -89,17 +89,13 @@ public class Main {
     }
 
     private static void createTestRecords() {
-
-        Cat cat = new Cat("Мурзик", 10, 10, 2023);
-        cat.setCommand("ко мне");
-        cat.setCommand("брысь");
-        animals.add(cat);
-        cat = new Cat("Мурка", 12, 8, 2022);
-        animals.add(cat);
-        cat = new Cat("Франт", 29, 5, 2024);
-        animals.add(cat);
-        Horse horse = new Horse("Быстрый", 10, 10, 2018);
-        animals.add(horse);
+        ArrayList<String> command = new ArrayList<>();
+        command.add("ко мне");
+        command.add("брысь");
+        createAnimal("11", "Мурзик", 10, 10, 2023, command);
+        createAnimal("11", "Мурка", 12, 8, 2022, null);
+        createAnimal("11", "Франт", 29, 5, 2024, null);
+        createAnimal("21", "Быстрый", 10, 10, 2018, null);
         showMenu();
     }
 
@@ -133,9 +129,8 @@ public class Main {
 
     public static void clrscr() {
 
-        for(int clear = 0; clear < 1000; clear++)
-        {
-            System.out.println("\b") ;
+        for (int clear = 0; clear < 1000; clear++) {
+            System.out.println("\b");
         }
 
         scanner = new Scanner(System.in);
@@ -188,7 +183,6 @@ public class Main {
 
     private static void enterInfo(int idType, int id) {
         clrscr();
-        String userInput;
         System.out.println("Введите имя:");
         String name = scanner.nextLine();
         System.out.println("Введите год рождения");
@@ -198,6 +192,12 @@ public class Main {
         System.out.println("Введите дату рождения");
         int day = scanner.nextInt();
         String animalID = String.valueOf(idType) + String.valueOf(id);
+        createAnimal(animalID, name, day, month, year, null);
+        showMenu();
+    }
+
+    private static void createAnimal(String animalID, String name, int day, int month, int year, ArrayList<String> commands) {
+        boolean error = false;
         switch (animalID) {
             case "11":
                 animals.add(new Cat(name, day, month, year));
@@ -218,8 +218,12 @@ public class Main {
                 animals.add(new Donkey(name, day, month, year));
                 break;
             default:
+                error = true;
         }
-        showMenu();
+        if (!error && commands != null) {
+            for (int i = 0; i < commands.size(); i++) {
+                animals.getLast().setCommand(commands.get(i));
+            }
+        }
     }
-
 }

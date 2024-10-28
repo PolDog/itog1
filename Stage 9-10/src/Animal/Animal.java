@@ -42,6 +42,7 @@ public class Animal {
     }
 
     public void setBirthDate(int day, int month, int year) {
+        month--;
         Calendar calendar = new GregorianCalendar(year, month, day);
         birthDate = calendar.getTime();
     }
