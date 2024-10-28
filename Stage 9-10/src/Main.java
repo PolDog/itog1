@@ -30,6 +30,7 @@ public class Main {
         System.out.println("");
         System.out.println("");
         System.out.println("9 Создать тестовые записи");
+        System.out.println("-------------------");
         System.out.println("0 Закрыть программу");
         String userInput = scanner.nextLine();
 
@@ -53,16 +54,22 @@ public class Main {
                 break;
             default:
                 System.out.println("Нет такого пункта");
+                showMenu();
         }
     }
 
     private static void addCommand() {
         clrscr();
-        System.out.println("Кого научить новым командам. Введите номер");
+        System.out.println("Кого научить новым командам. Введите номер животного.");
+        System.out.println("Введите 0 для отмены.");
         for (int i = 0; i < animals.size(); i++) {
-            System.out.println(i + "). " + animals.get(i).getType() + " " + animals.get(i).getName() + ", знает " + animals.get(i).getCommands().size() + " ком.");
+            System.out.println((i+1) + "). " + animals.get(i).getType() + " " + animals.get(i).getName() + ", знает " + animals.get(i).getCommands().size() + " ком.");
         }
         int animalNumber = scanner.nextInt();
+        if (animalNumber == 0) {
+            showMenu();
+        }
+        animalNumber--;
         System.out.println("Введите новую комманду:");
         scanner = new Scanner(System.in);
         String command = scanner.nextLine();
@@ -73,11 +80,16 @@ public class Main {
     }
 
     private static void showCommands() {
-        System.out.println("Чъи команды показать. Введите номер");
+        System.out.println("Чъи команды показать. Введите номер животного");
+        System.out.println("Введите 0 для отмены.");
         for (int i = 0; i < animals.size(); i++) {
             System.out.println(i + "). " + animals.get(i).getType() + " " + animals.get(i).getName() + ", знает " + animals.get(i).getCommands().size() + " ком.");
         }
         int userInput = scanner.nextInt();
+        if (userInput == 0) {
+            showMenu();
+        }
+        userInput--;
         clrscr();
         System.out.println(animals.get(userInput).getName() + " знает команды:");
         for (int i = 0; i < animals.get(userInput).getCommands().size(); i++) {
@@ -140,6 +152,8 @@ public class Main {
         clrscr();
         System.out.println("1 Домашнее животное");
         System.out.println("2 Въючное животное");
+        System.out.println("-------------------");
+        System.out.println("0 Отмена.");
         String userInput = scanner.nextLine();
         switch (userInput) {
             case "1":
@@ -149,7 +163,8 @@ public class Main {
                 selectTypePet(2);
                 break;
             default:
-                System.out.println("Нет такого пункта");
+                showMenu();
+                //System.out.println("Нет такого пункта");
         }
     }
 
@@ -164,6 +179,8 @@ public class Main {
             System.out.println("2 Верблюд");
             System.out.println("3 Осел");
         }
+        System.out.println("-------------------");
+        System.out.println("0 Отмена.");
         String userInput = scanner.nextLine();
         switch (userInput) {
             case "1":
@@ -175,9 +192,8 @@ public class Main {
             case "3":
                 enterInfo(idType, 3);
                 break;
-            case "4":
             default:
-                System.out.println("Нет такого пункта");
+                showMenu();
         }
     }
 
